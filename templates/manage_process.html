@@ -67,7 +67,7 @@
       </div>
       <!-- END JUMBOTRON -->
 
-      <div class="p-3 bg-white rounded shadow-sm">
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
         <h4 class="border-bottom border-gray pb-2 mb-0">Questions</h6>
         <table class="table">
           <tbody>
@@ -75,8 +75,8 @@
               <td class="w-75">What are your weaknesses?</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                  <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </td>
               </td>
@@ -85,8 +85,8 @@
               <td class="w-75">Tell me about yourself?</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                  <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </td>
               </td>
@@ -95,8 +95,8 @@
               <td class="w-75">What are your strenghts?</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                  <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </td>
               </td>
@@ -104,12 +104,11 @@
             <tr>
               <td class="w-75"></td>
               <td class="w-25">
-                <small class="d-block text-right mt-3">
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#new-question">
+                  <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#new-question">
+                    <i class="fas fa-plus-square"></i>
                     New Question 
                   </button>
-                </small>
               </td>
             </tr>
           </tbody>
@@ -118,47 +117,46 @@
 
 
       <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Candidates</h6>
-        <div class="media text-muted pt-3">
-        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-               <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                <button type="button" class="btn btn-secondary btn-sm">Delete</button>
-              </div>
-            </div>
-            <span class="d-block">#phone number</span>
-          </div>
-        </div>
-        <div class="media text-muted pt-3">
-          <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Details</a>
-            </div>
-            <span class="d-block">#phone number</span>
-          </div>
-        </div>
-        <div class="media text-muted pt-3">
-          <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Details</a>
-            </div>
-            <span class="d-block">#phone number</span>
-          </div>
-        </div>
-        <small class="d-block text-right mt-3">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#new-candidate">
-            New Candidate
-          </button>
-        </small>
-      </div>
+        <h4 class="border-bottom border-gray pb-2 mb-0">Candidates</h6>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="w-40">Dilma Vana Roussef</td>
+              <td class="w-35">+55 73 9 91191291</td>
+              <td class="w-25">
+                <div class="btn-group float-right" role="group" aria-label="actions">
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="w-40">Luis Inacio Lula da Silva</td>
+              <td class="w-35">+55 73 9 91191291</td>
+              <td class="w-25">
+                <div class="btn-group float-right" role="group" aria-label="actions">
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="w-40"></td>
+              <td class="w-35"></td>
+              <td class="w-25">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#new-candidate">
+                    <i class="fas fa-plus-square"></i>
+                    New Candidate
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> 
+    
     </main>
 
     <!-- Optional JavaScript -->
@@ -172,6 +170,7 @@
       integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous">
     </script>
 
+    <script src="https://kit.fontawesome.com/6bcd798364.js" crossorigin="anonymous"></script>
 
     <!-- MODAL NEW CANDIDATE -->
     <div class="modal fade" id="new-candidate" tabindex="-1" role="dialog" aria-labelledby="new-candidate-modal-center-title" aria-hidden="true">
