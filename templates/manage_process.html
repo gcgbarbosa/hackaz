@@ -71,6 +71,7 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Questions</h6>
         <table class="table">
           <tbody>
+            {% for question in questions %}
             <tr>
               <td class="w-75">What are your weaknesses?</td>
               <td class="w-25">
@@ -81,26 +82,7 @@
               </td>
               </td>
             </tr>
-            <tr>
-              <td class="w-75">Tell me about yourself?</td>
-              <td class="w-25">
-                <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
-                </div>
-              </td>
-              </td>
-            </tr>
-            <tr>
-              <td class="w-75">What are your strenghts?</td>
-              <td class="w-25">
-                <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
-                </div>
-              </td>
-              </td>
-            </tr>
+            {% endfor %}
             <tr>
               <td class="w-75"></td>
               <td class="w-25">
