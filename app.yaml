@@ -1,0 +1,19 @@
+runtime: python35
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  secure: always
+  script: main.app
+
+env_variables:
+  FIREBASE_PROJECT_ID: 'hackaz-265516'
+  CLOUD_SQL_USERNAME: YOUR-USERNAME
+  CLOUD_SQL_PASSWORD: YOUR-PASSWORD
+  CLOUD_SQL_DATABASE_NAME: YOUR-DATABASE
+  CLOUD_SQL_CONNECTION_NAME: YOUR-CONNECTION-NAME
+
+libraries:
+- name: flask
+  version: 1.1.1
