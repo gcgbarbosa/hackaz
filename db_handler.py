@@ -6,9 +6,9 @@ from flask import g
 import hashlib
 import datetime
 
-db_user = "root"#os.environ.get('CLOUD_SQL_USERNAME')
-db_password = "cluivilab"#os.environ.get('CLOUD_SQL_PASSWORD')
-db_name = "hackaz_db"#os.environ.get('CLOUD_SQL_DATABASE_NAME')
+db_user = os.environ.get('CLOUD_SQL_USERNAME')
+db_password = os.environ.get('CLOUD_SQL_PASSWORD')
+db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 account_sid = 'AC3e44fa4e321102d49970204274665cce'
