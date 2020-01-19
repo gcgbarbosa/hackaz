@@ -71,7 +71,7 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Questions</h6>
         <table class="table">
           <tbody>
-            {% for question in questions %}
+            {% for question in hiring.questions %}
             <tr>
               <td class="w-75">question.text</td>
               <td class="w-25">
@@ -102,7 +102,7 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Candidates</h6>
         <table class="table">
           <tbody>
-            {% for candidate in candidates %}
+            {% for candidate in hiring.candidates %}
             <tr>
               <td class="w-40">{{ candidate.name }}</td>
               <td class="w-35">{{ candidate.phone }}</td>
