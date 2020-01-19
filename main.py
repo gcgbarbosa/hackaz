@@ -295,8 +295,11 @@ def schedule_interview(token):
 @app.route('/confirm_schedule/<token>/<linux_epoch>')
 def confirm_schedule(token, linux_epoch):
     # check if the token is in the database
+    
     if check_token(token):
+        return 'fudeu'
         # add the linux_epoch to the database
+        update_scheduling(str(token), str(linux_epoch))
         # return status 200
         return jsonify(success=True)
     else:

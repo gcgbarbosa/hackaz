@@ -179,7 +179,7 @@ def check_token(token):
 
 def update_scheduling(token, linux_epoch):
     with g.db.cursor() as cursor:
-        update_statement = "UPDATE app_pos SET hash=\"\" AND epoch=\"{}\" WHERE hash=\"{}\"".format(linux_epoch, token)
+        update_statement = "UPDATE app_pos SET hash='', epoch=\"{}\" WHERE hash=\"{}\"".format(linux_epoch, token)
         cursor.execute(update_statement)
     g.db.commit()
 
