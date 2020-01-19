@@ -15,7 +15,6 @@ def sql_select(query):
     with g.db.cursor() as cursor:
         cursor.execute(query)
     data = cursor.fetchall()
-    close_db_connection()
     return data
 
 def sql_execute(statement):
@@ -24,7 +23,6 @@ def sql_execute(statement):
     with g.db.cursor() as cursor:
         cursor.execute(statement)
     g.db.commit()
-    close_db_connection()
     return data
 
 def open_db_connection():
