@@ -2,3 +2,6 @@ Flask==1.1.1
 PyMySQL==0.9.3
 Pyrebase==3.0.27
 twilio~=6.0.0
+google-cloud-storage
+google-cloud-speech
+sendgrid
