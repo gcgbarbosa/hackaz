@@ -139,6 +139,17 @@ def conf_remove_question():
 	remove_question(id_position, id_question)
 	redirect(url_for('manage_process')) 
 
+@app.route('/make_calls', methods=['GET', 'POST'])
+def make_calls():
+	# req_data = request.get_json(force=True)
+	# phone = req_data['phone']
+	# id_position = req_data['id_position']
+	phone = request.args.get('phone')
+	id_position = request.args.get('id_position')
+	print('===============>')
+	print(phone, id_position)
+	answer_phone.start_call(phone, id_position)
+
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
