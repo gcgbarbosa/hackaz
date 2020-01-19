@@ -70,14 +70,15 @@
       <!-- END JUMBOTRON -->
 
       <div class="row mb-2">
+        {% for position in positions %}
         <div class="col-md-12">
           <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">On time</strong>
-              <h3 class="mb-0">Name of the position #</h3>
-              <div class="mb-1 text-muted">Due date: ##DATE</div>
-              <p class="card-text mb-auto">Brief description of the project.</p>
-              <a href="{{ url_for('manage_process') }}" class="stretched-link">Manage hiring process</a>
+              <h3 class="mb-0"> {{ position[1] }} #{{ position[0] }}</h3>
+              <div class="mb-1 text-muted">Due date: ## Jan 19, 2020</div>
+              <p class="card-text mb-auto">{{ position[5] }}</p>
+              <a href="/manage_process/{{ position[0] }}" class="stretched-link">Manage hiring process</a>
             </div>
             <div class="col-auto d-none d-lg-block">
               <svg 
@@ -87,40 +88,21 @@
               >
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Progress</text>
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em"></text>
               </svg>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-              <strong class="d-inline-block mb-2 text-primary">On time</strong>
-              <h3 class="mb-0">Name of the position #ID</h3>
-              <div class="mb-1 text-muted">Due date: ##DATE</div>
-              <p class="card-text mb-auto">Brief description of the project.</p>
-              <a href="{{ url_for('manage_process') }}" class="stretched-link">Manage hiring process</a>
-            </div>
-            <div class="col-auto d-none d-lg-block">
-              <svg 
-                class="bd-placeholder-img" width="200" height="250"
-                 xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
-                 focusable="false" role="img" aria-label="Placeholder: Thumbnail"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Progress</text>
-              </svg>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>    
     
     </main>
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 

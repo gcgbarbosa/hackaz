@@ -2,7 +2,7 @@ import os
 import pyrebase
 import pymysql
 import json
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, redirect, url_for, g, jsonify
 from db_handler import *
 from twilio.twiml.voice_response import VoiceResponse, Say
 from twilio.rest import Client
@@ -232,17 +232,42 @@ def index():
         password = request.form['password']
         try:
             auth.sign_in_with_email_and_password(email, password)
-        #user_id = auth.get_account_info(user['idToken'])
-        #session['usr'] = user_id            
-            return render_template('dashboard.html')
+            #user_id = auth.get_account_info(user['idToken'])
+            #session['usr'] = user_id            
+            #return render_template('dashboard.html')
+            #redirect the user to /dashboard
+            return redirect('/dashboard')
         except:
             #unsuccessful = 'Please check your credentials'
             #return render_template('index.html', umessage=unsuccessful)
             pass
     return render_template('index.html')
 
-@app.route('/manage_process', methods=['GET', 'POST'])
-def manage_process():
+@app.route('/dashboard')
+def dashboard():
+    # get get the list of processes from the database
+    
+    # pass the list of processes to the database
+    positions = get_positions()
+     
+    return render_template('dashboard.html', positions=positions)
+
+
+@app.route('/manage_process/<process_id>')
+def manage_process(process_id):
+    # retrieve the information about the position
+    position = get_position(process_id)
+
+    ## list all questions of a project
+    questions = get_questions(process_id)
+
+    ## list all the candidates of a project
+    candidates = get_candidates(process_id)
+    #return str(candidates)
+
+    return render_template('manage_process.html', position=position, questions=questions, candidates=candidates)
+
+    ###############################
     if request.method == 'POST':
         # do stuff when the form is submitted
 
@@ -265,7 +290,7 @@ def manage_process():
     for i in range(2):        
         candidate = {"id": i, "name": "Candidate" + str(i), "phone":"111111111111"}
         hiring["candidates"].append(candidate)
-    return render_template('manage_process.html', hiring=hiring)
+    
 
 @app.route('/schedule_interview/<token>')
 def schedule_interview(token):
@@ -273,29 +298,20 @@ def schedule_interview(token):
 
 @app.route('/confirm_schedule/<token>/<linux_epoch>')
 def confirm_schedule(token, linux_epoch):
-    return token + ' ' + linux_epoch
-
-@app.route('/conf_scheduling', methods=['POST'])
-def conf_scheduling():
-    token = request.args.get('token')
-    linux_epoch = request.args.get('linux_epoch')
-    print("Params")
-    print(token)
-    print(linux_epoch)
-    if token!= None and not check_token(token):
-        print("No Token")
-        #TODO error
-        return
+    # check if the token is in the database
+    if check_token(token):
+        # add the linux_epoch to the database
+        # return status 200
+        return jsonify(success=True)
     else:
-        if linux_epoch == None:    
-            print("No Epoch")
-            print(linux_epoch)
-            return redirect(url_for('schedule_interview'), token=token) 
-        else:        
-            print("Token Removed")
-            print(token)
-            clear_token(token)
-            return redirect(url_for('schedule_interview'))    
+        return jsonify(success=False)
+    #return token + ' ' + linux_epoch
+
+@app.route('/new_question/<p_id>/<question>')
+def new_question(p_id, question):
+    #return str(question)
+    insert_update_question(int(p_id), question)
+    return jsonify(success=True)
 
 @app.route('/conf_create_question', methods=['POST'])
 def conf_create_question():
