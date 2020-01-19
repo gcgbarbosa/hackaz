@@ -92,11 +92,7 @@ def get_next_question():
 
 @app.route("/testcall", methods=['GET', 'POST'])
 def test_call():
-    call_id = start_call(15038808741, 16)
-    #call_id = "CAe5a777f6971645aefb221f3ec3794f63"
-    #q_list = "[{'text': 'Whats your name?', 'id_question': 1, 'responseUrl': 'https://api.twilio.com/2010-04-01/Accounts/AC3e44fa4e321102d49970204274665cce/Recordings/REb68625bfd59e89afddb1cd8b504d5a58'}, {'text': 'How old are you?', 'id_question': 2, 'responseUrl': 'https://api.twilio.com/2010-04-01/Accounts/AC3e44fa4e321102d49970204274665cce/Recordings/RE1ffdfc810a3e0e252c27fe212e5ef70a'}]" 
-    #q_list = json.loads(q_list.replace("'", '\"'))
-    #transcribe_response(call_id, q_list) 
+    send_schedule_link('15038808741', 'testhash')
     return "OK\n"
 
 
@@ -352,11 +348,10 @@ def conf_remove_question():
 @app.route('/make_calls', methods=['GET', 'POST'])
 def make_calls():
     calls = get_calls()
-    calls = [{'Aphone':'15038808741', 'Ppid':12}]
-
+    print(calls)
     if len(calls) > 0:    
-        phone = calls[0]['Aphone']
-        id_position = calls[0]['Ppid']    
+        phone = calls[0][0]
+        id_position = calls[0][1]    
         answer_phone.start_call(phone, id_position)
 
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}    
