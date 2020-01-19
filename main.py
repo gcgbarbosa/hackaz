@@ -23,15 +23,17 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 def mock():
+	print("Candidates")
+	print(get_candidates(12))
     #create_interviewer("pelovett@gmail.com", "Peter Lovett")
     #create_interviewer("pelovett@gmail.com", "Peter Lovett")
-    id_position = create_position("Software Development", 0, "pelovett@gmail.com", "Code some stuff")
-    create_question(id_position, "Whats your name?")
-    create_question(id_position, "How old are you?")
-    data = {"phone":"15038808741", "name":"Peter Lovett"}
-    create_candidate(id_position, data)
-    data = {"phone":"15207885673", "name":"Paulo Soares"}
-    create_candidate(id_position, data)
+    # id_position = create_position("Software Development", 0, "pelovett@gmail.com", "Code some stuff")
+    # create_question(id_position, "Whats your name?")
+    # create_question(id_position, "How old are you?")
+    # data = {"phone":"15038808741", "name":"Peter Lovett"}
+    # create_candidate(id_position, data)
+    # data = {"phone":"15207885673", "name":"Paulo Soares"}
+    # create_candidate(id_position, data)
     #get_questions(12)
 
 @app.before_request
