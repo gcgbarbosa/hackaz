@@ -351,10 +351,10 @@ def make_calls():
     print(calls)
     if len(calls) > 0:    
         phone = calls[0][0]
-        id_position = calls[0][1]    
-        answer_phone.start_call(phone, id_position)
+        id_position = calls[0][1]  
+        start_call(phone, id_position)
 
-    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}    
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'}   
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App

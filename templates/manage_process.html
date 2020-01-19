@@ -256,13 +256,13 @@
 
         name = $('#new-candidate-name').val()
         phone = $('#new-candidate-phone').val()
-        alert({{ position[0] }})
-        alert(name)
-        alert(phone)
+        //alert({{ position[0] }})
+        //alert(name)
+        //alert(phone)
 
-        //$.get('/new_candidate/{{ position[0] }}/'+name+'/'+phone, function(data){
-        //  location.reload()
-        //}); 
+        $.get('/new_candidate/{{ position[0] }}/'+name+'/'+phone, function(data){
+          location.reload()
+        }); 
       });
 
       $("#edit-confirm-modal-question").click(function() {
@@ -271,7 +271,7 @@
         question = $('#edit-txt-question').val()
         question_id = $("#edit-question-id").val()
 
-        alert(question_id)
+        //alert(question_id)
         
         $.get('/edit_question/{{ position[0] }}/'+question+'/'+question_id, function(data){
           location.reload()
@@ -284,7 +284,7 @@
 
       function edit_question(question_id, text){
         // set the id
-        alert(question_id)
+        //alert(question_id)
         $("#edit-question-id").val(question_id)
         // set the text
         $("#edit-txt-question").val(text)
