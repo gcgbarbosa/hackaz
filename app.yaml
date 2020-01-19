@@ -15,3 +15,5 @@ env_variables:
   CLOUD_SQL_PASSWORD: 'cluivilab'
   CLOUD_SQL_DATABASE_NAME: 'hackaz_db'
   CLOUD_SQL_CONNECTION_NAME: 'hackaz-265516:us-west1:hackaz'
+  GOOGLE_APPLICATION_CREDENTIALS: 'static/Hackaz-c42396f04899.json'
+
