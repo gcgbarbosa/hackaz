@@ -1,3 +1,7 @@
+{% if token %}  
+{{token}}
+{% endif %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,7 +66,11 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- moment library -->
@@ -96,7 +104,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Confirm time</button>
+            <button type="button" class="btn btn-primary" id="confirm-time-modal-btn">Confirm time</button>
           </div>
         </div>
       </div>
@@ -108,7 +116,7 @@
         input_date = new Date($("#meeting-time").val());
         time_diff = input_date.getTimezoneOffset();
         // get the utc date in linux epoch
-        utc_date = input_date + time_diff;
+        utc_date = parseInt(input_date.getTime()) + parseInt(time_diff);
 
         if(input_date){
           // populate local date
@@ -121,6 +129,31 @@
           $("#confirm-time").modal('toggle');
         }
 
+      });
+
+      // add an event on click to the confirm button
+      $("#confirm-time-modal-btn").click(function() {
+        // get the token from the hidden element
+        token = $("#token").val();
+        // call get function 
+        //$.get("schedule_interview", {token:token, linux_epoch:utc_date});
+        alert("{{url_for('schedule_interview')}}")
+        $.ajax({
+          url: "{{url_for('schedule_interview')}}",
+          type: "GET",
+          data: {
+            'token': token,
+            'linux_epoch': linux_epoch
+          },
+          success: function(response) {
+
+          },
+          error: function(xhr) {
+
+          }
+        }); 
+        // refresh the page
+        
       });
     </script>
 

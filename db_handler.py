@@ -2,6 +2,7 @@ import os
 import pymysql
 import json
 from flask import g
+import hashlib
 
 db_user = "root"#os.environ.get('CLOUD_SQL_USERNAME')
 db_password = "cluivilab"#os.environ.get('CLOUD_SQL_PASSWORD')
@@ -55,9 +56,7 @@ def create_application(data):
 def create_candidate(id_position, data):
     create_application(data)
     with g.db.cursor() as cursor:
-        # TODO 
-        hash = "123456"
-        #insert_statement = "INSERT INTO app_pos (Aphone, Ppid, hash) VALUES (\"{}\", {}, \"{}\") ON DUPLICATE KEY UPDATE hash = \"{}\" WHERE Aphone = \"{}\" AND Ppid = {}".format(data["phone"], id_position, hash, hash, data["phone"], id_position)
+        hash = hashlib.md5(os.urandom(32)).hexdigest()
         insert_statement = "INSERT INTO app_pos (Aphone, Ppid, hash) VALUES (\"{}\", {}, \"{}\")".format(data["phone"], id_position, hash)
         cursor.execute(insert_statement) 
     g.db.commit()       
@@ -142,7 +141,20 @@ def get_candidates(id_position):
         cursor.execute(sql)
     return list(cursor.fetchall())
 
+def check_token(token):
+    with g.db.cursor() as cursor:
+        sql = "SELECT hash, COUNT(*) FROM app_pos WHERE hash=\"{}\"".format(token)
+        try:
+    	    cursor.execute(sql)
+    	    return True
+        except:
+            return False
 
+def update_scheduling(token, linux_epoch):
+    with g.db.cursor() as cursor:
+        update_statement = "UPDATE app_pos SET hash=\"\" AND epoch=\"{}\" WHERE hash=\"{}\"".format(linux_epoch, token)
+        cursor.execute(update_statement)
+    g.db.commit()
 
 
 

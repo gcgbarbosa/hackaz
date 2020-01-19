@@ -13,7 +13,16 @@ env_variables:
   CLOUD_SQL_PASSWORD: YOUR-PASSWORD
   CLOUD_SQL_DATABASE_NAME: YOUR-DATABASE
   CLOUD_SQL_CONNECTION_NAME: YOUR-CONNECTION-NAME
+  GOOGLE-CLOUD-STORAGE:
 
 libraries:
-- name: flask
+- name: Flask
   version: 1.1.1
+- name: PyMySQL
+  version: 0.9.3
+- name: Pyrebase
+  version: 3.0.27
+- name: twilio
+  version: 6.0.0
+- name: google-cloud-storage
+  version: 
