@@ -1,6 +1,7 @@
 import os
 import pymysql
 import json
+from twilio.rest import Client
 from flask import g
 import hashlib
 import datetime
@@ -10,6 +11,9 @@ db_password = "cluivilab"#os.environ.get('CLOUD_SQL_PASSWORD')
 db_name = "hackaz_db"#os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
+account_sid = 'AC3e44fa4e321102d49970204274665cce'
+auth_token = '1075a9192b2ecef980c681c59b21af96'
+client = Client(account_sid, auth_token)
 
 def sql_select(query):
     data = []
@@ -60,6 +64,14 @@ def create_candidate(id_position, data):
         insert_statement = "INSERT INTO app_pos (Aphone, Ppid, hash) VALUES (\"{}\", {}, \"{}\")".format(data["phone"], id_position, hash)
         cursor.execute(insert_statement) 
     g.db.commit()       
+    send_schedule_link(data["phone"], hash)
+
+def send_schedule_link(phone_num, hash_code):
+    message = client.messages.create(
+                body='Hi, please schedule your phone screening: https://hackaz-265516.appspot.com/schedule_interview/'+hash_code,
+                from_='+12054481748',
+                to='+'+str(phone_num)
+    )
 
 def update_candidate(id_position, id_candidate, data):
     with g.db.cursor() as cursor:
@@ -174,8 +186,9 @@ def update_scheduling(token, linux_epoch):
 def get_calls():
     epoch_now = int(datetime.datetime.now().timestamp())
     with g.db.cursor() as cursor:
-        sql = "SELECT Aphone, Ppid FROM app_pos WHERE epoch < {} AND Rrid = \"\"".format(epoch_now)
+        sql = "SELECT Aphone, Ppid FROM app_pos WHERE epoch < {} AND Rrid IS NULL".format(epoch_now)
         cursor.execute(sql)
+    g.db.commit()
     return list(cursor.fetchall())
 
 

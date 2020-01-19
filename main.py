@@ -336,11 +336,10 @@ def conf_remove_question():
 @app.route('/make_calls', methods=['GET', 'POST'])
 def make_calls():
     calls = get_calls()
-    calls = [{'Aphone':'15038808741', 'Ppid':12}]
-
+    print(calls)
     if len(calls) > 0:    
-        phone = calls[0]['Aphone']
-        id_position = calls[0]['Ppid']    
+        phone = calls[0][0]
+        id_position = calls[0][1]    
         answer_phone.start_call(phone, id_position)
 
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}    
