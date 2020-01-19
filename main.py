@@ -2,7 +2,7 @@ import os
 import pyrebase
 import pymysql
 import json
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from db_handler import *
 
 app = Flask(__name__)
@@ -23,8 +23,8 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 def mock():
-	print("Candidates")
-	print(get_candidates(12))
+    print("Candidates")
+    print(get_candidates(12))
     #create_interviewer("pelovett@gmail.com", "Peter Lovett")
     #create_interviewer("pelovett@gmail.com", "Peter Lovett")
     # id_position = create_position("Software Development", 0, "pelovett@gmail.com", "Code some stuff")
@@ -35,6 +35,9 @@ def mock():
     # data = {"phone":"15207885673", "name":"Paulo Soares"}
     # create_candidate(id_position, data)
     #get_questions(12)
+
+def get_linux_epoch(scheduled_date):
+    return 4
 
 @app.before_request
 def before_request():
@@ -71,6 +74,8 @@ def manage_process():
         # the redirect can be to the same route or somewhere else
         return redirect(url_for('index'))
 
+    # TODO - Load the hiring processes for that employee
+
     # show the form, it wasn't submitted
     hiring = {}
     hiring["position"] = "Software Development"
@@ -85,6 +90,50 @@ def manage_process():
         candidate = {"id": i, "name": "Candidate" + str(i), "phone":"111111111111"}
         hiring["candidates"].append(candidate)
     return render_template('manage_process.html', hiring=hiring)
+
+@app.route('/schedule_interview/<token>')
+def schedule_interview(token):
+    return render_template('schedule_interview.html', token=token)
+
+@app.route('/confirm_schedule/<token>/<linux_epoch>')
+def confirm_schedule(token, linux_epoch):
+    return token + ' ' + linux_epoch
+
+@app.route('/conf_scheduling', methods=['POST'])
+def conf_scheduling():
+    token = request.args.get('token')
+    linux_epoch = request.args.get('linux_epoch')
+    print("Params")
+    print(token)
+    print(linux_epoch)
+    if token!= None and not check_token(token):
+        print("No Token")
+        #TODO error
+        return
+    else:
+        if linux_epoch == None:    
+            print("No Epoch")
+            print(linux_epoch)
+            return redirect(url_for('schedule_interview'), token=token) 
+        else:        
+            print("Token Removed")
+            print(token)
+            clear_token(token)
+            return redirect(url_for('schedule_interview'))    
+
+@app.route('/conf_create_question', methods=['POST'])
+def conf_create_question():
+	id_position = 0
+	text = ""
+	create_question(id_position, text)
+	redirect(url_for('manage_process'))    
+
+@app.route('/conf_remove_question', methods=['POST'])
+def conf_remove_question():
+	id_position = 0
+	id_question = 0
+	remove_question(id_position, id_question)
+	redirect(url_for('manage_process')) 
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
