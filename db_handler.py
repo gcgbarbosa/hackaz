@@ -10,18 +10,18 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 
 def sql_select(query):
-	data = []
-	open_db_connection()
-	with g.db.cursor() as cursor:
+    data = []
+    open_db_connection()
+    with g.db.cursor() as cursor:
         cursor.execute(query)
     data = cursor.fetchall()
     close_db_connection()
     return data
 
 def sql_execute(statement):
-	data = []
-	open_db_connection()
-	with g.db.cursor() as cursor:
+    data = []
+    open_db_connection()
+    with g.db.cursor() as cursor:
         cursor.execute(statement)
     g.db.commit()
     close_db_connection()
@@ -137,4 +137,14 @@ def get_questions(id_position):
     	return json.loads(questions_json)
 
 def get_candidates(id_position):
-    pass
+    with g.db.cursor() as cursor:
+        sql = "SELECT app_pos.Aphone, application.name FROM app_pos, application WHERE app_pos.Ppid =\"{}\" AND app_pos.Aphone = application.phone".format(id_position)
+        cursor.execute(sql)
+    return list(cursor.fetchall())
+
+
+
+
+
+
+
