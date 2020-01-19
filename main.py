@@ -3,7 +3,10 @@ import pyrebase
 import pymysql
 import json
 from flask import Flask, render_template, request, g
+
 app = Flask(__name__)
+
+import answer_phone
 
 config = {
     "apiKey": "AIzaSyD5WuKixyIe9hx2CthXRAWr9gRPWdulq_U",
@@ -120,21 +123,20 @@ def remove_question(id_question, id_position):
     cursor.execute(update_statement)
 
 def get_questions(id_position):
-    return []
+    cursor = g.db.cursor()
+    sql = "SELECT questions FROM positions WHERE pid =\"{}\"".format(id_position)
+    cursor.execute(sql)
+    print(cursor)
+    return cursor
 
 def get_candidates(id_position):
     pass
 
 def mock():
+	pass
     #create_interviewer("pelovett@gmail.com", "Peter Lovett")
-    id_position = create_position("Software Development", 0, "pelovett@gmail.com", "Code some stuff")
-    create_question(id_position, "Whats your name?")
-    create_question(id_position, "How old are you?")
-    data = {"phone":"15038808741", "name":"Peter Lovett"}
-    create_candidate(id_position, data)
-    data = {"phone":"15207885673", "name":"Paulo Soares"}
-    create_candidate(id_position, data)
-    g.db.commit()
+    # 
+    #get_questions(12)
 
 # @app.before_request
 # def before_request():
