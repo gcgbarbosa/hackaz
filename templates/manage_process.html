@@ -59,9 +59,9 @@
       <!-- JUMBOTRON -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Name of the position #ID</h1>
+          <h1 class="display-4">{{ hiring_position }} #{{ hiring_id }}</h1>
           <p class="lead">
-            Brief description of the hiring process. 
+            {{ hiring_description }}
           </p>
         </div>   
       </div>
@@ -73,7 +73,7 @@
           <tbody>
             {% for question in questions %}
             <tr>
-              <td class="w-75">What are your weaknesses?</td>
+              <td class="w-75">question.text</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
                   <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
@@ -102,9 +102,10 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Candidates</h6>
         <table class="table">
           <tbody>
+            {% for candidate in candidates %}
             <tr>
-              <td class="w-40">Dilma Vana Roussef</td>
-              <td class="w-35">+55 73 9 91191291</td>
+              <td class="w-40">{{ candidate.name }}</td>
+              <td class="w-35">{{ candidate.phone }}</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
                   <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
@@ -112,17 +113,7 @@
                 </div>
               </td>
             </tr>
-
-            <tr>
-              <td class="w-40">Luis Inacio Lula da Silva</td>
-              <td class="w-35">+55 73 9 91191291</td>
-              <td class="w-25">
-                <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
-                </div>
-              </td>
-            </tr>
+            {% endfor %}
             
             <tr>
               <td class="w-40"></td>
