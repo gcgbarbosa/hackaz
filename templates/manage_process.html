@@ -59,9 +59,9 @@
       <!-- JUMBOTRON -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">{{ hiring.position }} #{{ hiring.id }}</h1>
+          <h1 class="display-4">{{ position[1] }} #{{ position[0] }}</h1>
           <p class="lead">
-            {{ hiring.description }}
+            {{ position[5] }}
           </p>
         </div>   
       </div>
@@ -71,13 +71,13 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Questions</h6>
         <table class="table">
           <tbody>
-            {% for question in hiring.questions %}
+            {% for question in questions %}
             <tr>
-              <td class="w-75">question.text</td>
+              <td class="w-75"> {{ question.text}}</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
+                  <button onclick="edit_question('{{ question.id_question }}' , '{{ question.text}}')" type="button" class="btn btn-secondary btn-sm edit-question-btn"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm delete-question-btn"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </td>
               </td>
@@ -102,14 +102,14 @@
         <h4 class="border-bottom border-gray pb-2 mb-0">Candidates</h6>
         <table class="table">
           <tbody>
-            {% for candidate in hiring.candidates %}
+            {% for candidate in candidates %}
             <tr>
-              <td class="w-40">{{ candidate.name }}</td>
-              <td class="w-35">{{ candidate.phone }}</td>
+              <td class="w-40">{{ candidate[0] }}</td>
+              <td class="w-35">{{ candidate[1] }}</td>
               <td class="w-25">
                 <div class="btn-group float-right" role="group" aria-label="actions">
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i></button>
-                  <button type="button" class="btn btn-secondary btn-sm"><i class="fas fa-trash-alt"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm edit-candidate-btn"><i class="fas fa-edit"></i></button>
+                  <button type="button" class="btn btn-secondary btn-sm delete-candidate-btn"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </td>
             </tr>
@@ -133,8 +133,10 @@
     </main>
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -173,7 +175,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button id="confirm-modal-candidate" type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -195,19 +197,73 @@
               <div class="form-group row">
                 <label for="colFormLabel" class="col-sm-2 col-form-label">Question</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" id="colFormLabel" placeholder="?"></textarea>
+                  <textarea class="form-control" id="txt-question" placeholder="?"></textarea>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button id="confirm-modal-question" type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- END MODAL NEW CANDIDATE -->j
+    <!-- END MODAL NEW QUESTION -->
+
+    <!-- MODAL EDIT QUESTION -->
+    <div class="modal fade" id="edit-question" tabindex="-1" role="dialog" aria-labelledby="new-question-modal-center-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edit-question-title">Add new question</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input type="hidden" id="edit-question-id">
+                <div class="form-group row">
+                  <label for="colFormLabel" class="col-sm-2 col-form-label">Question</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="edit-txt-question" placeholder="?"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="confirm-modal-question" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL EDIT QUESTION -->
+
+    <script>
+      
+      $("#confirm-modal-question").click(function() {
+        // get the question text
+        question = $('#txt-question').val()
+        $.get('/new_question/{{ position[0] }}/'+question, function(data){
+          location.reload()
+        }); 
+      });
+
+      $(".edit-question-btn").click(function(data, response) {
+        console.log(data)
+      });
+
+      function edit_question(question_id, text){
+        // set the id
+        $("#edit-question-id").val(question_id)
+        // set the text
+        $("#edit-txt-question").val(text)
+        // toggle the modal
+        $("#edit-question").modal('toggle');
+      }
+    </script>
 
   </body>
 </html>

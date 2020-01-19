@@ -103,14 +103,14 @@ def create_interviewer(email, name):
     g.db.commit()
     return g.db.insert_id()    
 
-def insert_update_candidate(id_position, id_candidate, data):
+def insert_update_candidate(id_position, data, id_candidate=None):
     if id_candidate == None:
         create_candidate(id_position, data)
     else:
         update_candidate(id_position, id_candidate, data)
 
-def insert_update_question(id_position, id_question, text):
-    if id_candidate == None:
+def insert_update_question(id_position, text, id_question=None):
+    if id_question == None:
         create_question(id_position, text)
     else:
         update_question(id_position, id_question, text)
@@ -138,6 +138,19 @@ def get_candidates(id_position):
         sql = "SELECT app_pos.Aphone, application.name FROM app_pos, application WHERE app_pos.Ppid =\"{}\" AND app_pos.Aphone = application.phone".format(id_position)
         cursor.execute(sql)
     return list(cursor.fetchall())
+
+
+def get_positions():
+    with g.db.cursor() as cursor:
+        sql = "SELECT * FROM positions"
+        cursor.execute(sql)
+    return list(cursor.fetchall())
+
+def get_position(id_position):
+    with g.db.cursor() as cursor:
+        sql = "SELECT * FROM positions WHERE pid = " + str(id_position)
+        cursor.execute(sql)
+    return list(cursor.fetchone())
 
 def check_token(token):
     with g.db.cursor() as cursor:
