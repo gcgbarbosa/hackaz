@@ -125,7 +125,7 @@
       });
       
       $("#confirm-time-modal-btn").click(function() {
-        $.get('/confirm_test/{{token}}/'+utc_date, function(data){
+        $.get('/confirm_schedule/{{token}}/'+utc_date, function(data){
           alert(data); 
         }); 
       });
