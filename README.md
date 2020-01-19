@@ -1,3 +1,3 @@
 # AIscreen
 
-![image](logo.png)
+![image](static/logo.png)
