@@ -53,7 +53,9 @@
       <h1 class="h3 mb-3 font-weight-normal">Please select a meeting time for your interview.</h1>
       <label for="meeting-time" class="sr-only">Email address</label>
       <input type="datetime-local" id="meeting-time" name="meeting-time" class="form-control" placeholder="" required autofocus>
-      <input type="hidden" id="token"> 
+      {% if token %}  
+      <input type="hidden" id="token" value="{{token}}"> 
+      {% endif %}
       <button class="btn btn-lg btn-primary btn-block" id="confirm-time-btn" onclick="" >Save</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
     </div>
