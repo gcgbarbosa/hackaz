@@ -10,9 +10,22 @@ db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 
 def sql_select(query):
-	pass
+	data = []
+	open_db_connection()
+	with g.db.cursor() as cursor:
+        cursor.execute(query)
+    data = cursor.fetchall()
+    close_db_connection()
+    return data
 
-
+def sql_execute(statement):
+	data = []
+	open_db_connection()
+	with g.db.cursor() as cursor:
+        cursor.execute(statement)
+    g.db.commit()
+    close_db_connection()
+    return data
 
 def open_db_connection():
     if os.environ.get('GAE_ENV') == 'standard':
