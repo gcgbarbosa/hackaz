@@ -3,6 +3,7 @@ import pymysql
 import json
 from flask import g
 import hashlib
+import datetime
 
 db_user = "root"#os.environ.get('CLOUD_SQL_USERNAME')
 db_password = "cluivilab"#os.environ.get('CLOUD_SQL_PASSWORD')
@@ -78,9 +79,11 @@ def create_question(id_position, text):
 def update_question(id_position, id_question, new_text):
     questions = get_questions(id_position)
     for question in questions:
-        question.update((id, new_text) for id, _ in question.iteritems() if id == id_question)
+        if question['id_question'] == id_question:             
+            question["text"] = new_text
+
     with g.db.cursor() as cursor:
-        update_statement = "UPDATE positions SET questions=\"{}\" WHERE pid={}".format(json.dumps(questions), id_position)
+        update_statement = "UPDATE positions SET questions=\'{}\' WHERE pid={}".format(json.dumps(questions), id_position)
         cursor.execute(update_statement)
     g.db.commit()
 
@@ -104,14 +107,14 @@ def create_interviewer(email, name):
     g.db.commit()
     return g.db.insert_id()    
 
-def insert_update_candidate(id_position, id_candidate, data):
+def insert_update_candidate(id_position, data, id_candidate=None):
     if id_candidate == None:
         create_candidate(id_position, data)
     else:
         update_candidate(id_position, id_candidate, data)
 
-def insert_update_question(id_position, id_question, text):
-    if id_candidate == None:
+def insert_update_question(id_position, text, id_question=None):
+    if id_question == None:
         create_question(id_position, text)
     else:
         update_question(id_position, id_question, text)
@@ -140,6 +143,19 @@ def get_candidates(id_position):
         cursor.execute(sql)
     return list(cursor.fetchall())
 
+
+def get_positions():
+    with g.db.cursor() as cursor:
+        sql = "SELECT * FROM positions"
+        cursor.execute(sql)
+    return list(cursor.fetchall())
+
+def get_position(id_position):
+    with g.db.cursor() as cursor:
+        sql = "SELECT * FROM positions WHERE pid = " + str(id_position)
+        cursor.execute(sql)
+    return list(cursor.fetchone())
+
 def check_token(token):
     with g.db.cursor() as cursor:
         sql = "SELECT hash, COUNT(*) FROM app_pos WHERE hash=\"{}\"".format(token)
@@ -154,6 +170,13 @@ def update_scheduling(token, linux_epoch):
         update_statement = "UPDATE app_pos SET hash=\"\" AND epoch=\"{}\" WHERE hash=\"{}\"".format(linux_epoch, token)
         cursor.execute(update_statement)
     g.db.commit()
+
+def get_calls():
+    epoch_now = int(datetime.datetime.now().timestamp())
+    with g.db.cursor() as cursor:
+        sql = "SELECT Aphone, Ppid FROM app_pos WHERE epoch < {} AND Rrid = \"\"".format(epoch_now)
+        cursor.execute(sql)
+    return list(cursor.fetchall())
 
 
 

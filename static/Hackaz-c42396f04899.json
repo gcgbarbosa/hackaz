@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hackaz-265516",
+  "private_key_id": "c42396f0489956b372c6c2fa2b2c7d5183da841c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCF71WtZxBAjq4k\nlUbvK+WyQRzH8lZmCED43yhJLWuhVNee0rRh0+PoebJEMDVAs/v7rUb72yC6D6mZ\nTd+vfG8T2BuRd9A7D8dVYKYLgaRTNQ3f95/pONJeC6y5yA1simmwcRwPproYPEPB\nXB3PboribaLFNTwl4m3IgFZcgYRHKIrAYzOnz8LwryPvefMFlLFyMS5JzoN3JKwr\nIFkj5mR+AM02S1IwEpgeHtrNHrxU5xBn6H0/nDuB08St6PxDmzjEyTPCm4ULnSfr\nXa4zzLJ4qnYHqxeh4GY+O2B86MB7FIe0d0kT/lYKPelNWqJM+1ekQHB1MbcJ703N\nvZxmxdexAgMBAAECggEAE5QExjBGo+k3c4mOsO+NyBzUhDXcg1W5iae1T90f2pl4\nW3MZgyNiMV14vZb+cdLdhtCxi6dghVI8zHghtplN82ynuv/0pG2OCeDy5MOyracX\nvCGKcqEnvy+dtBqWO8OP54bhPzh0A47rqJw6j1PtYWP9Yy6A+Fi9C44XEbatC2mf\nm1NBFkBh3Di9b/OaDDtuDyoZ9XuQxqNWa0SEBZGW6Kapo2rOyG+6UCVJx6Ji7U5P\n8yk0+HP+1rFCTA35IXkEvbeJgOaa6XYEkgPki0cjUA7h4WSi1csSgPuJp+TboPcC\nRt+xFXkFWhSnufwovb+DJAYHwHQVLf3Li7BpWp3u8QKBgQC7CJV9tcEulMu54mJX\nL6z22W+zcc2OW8S8t0d5WY76uPvlK8FtjBVNCQA8yj8V/OJvd96pGRPNJUHjeqtK\nOBAbf1k7scuf00onGG/BpC4wuE6PssxgwxB6Boevb6zr9wTVPymdRrW0cJWoXBL3\nko6EPEG15zKpAn6lBZkMROro0wKBgQC3UmVgLhbp9g9oiUUXFVukghdIMHemsrof\nKZZocji5IObqjQnjRW6hIb5CKyqeHx6tFWszjvAh+ITQEBEypdWOm5Uv9QSYytg9\nbegVajdlcnwg5kd1tbc5LSwV3RD68oOxO2x01GOZSW/Ej0P1tq1c/DgiYn8r5xR6\nx5wJlaKq6wKBgQCbYaBAFbVuK3Os9CRa5mK9mRqxa4QoFpk1ZtZcPEkKho/ObjF9\n/vjbTPUDi8opTDQaAu3acdj/f0pj389aE4VeMshBTY4rM2/RVv3RU8KD+zpZK2Ob\np7KSjcY/u3lfd5JuTtEVtl7Sjw3mFsgzIXCA70ZwBqkRu97W3fWuObsmvQKBgH4R\nds/OwklAwtXj2JSIRo56PCKT2iTUMjSt99Z5/lIps0NHnK4jmHHM77c3UkaNJh5n\nZWJ+gNsLueIPupP3AUbh7ZWeTPv6Ovz7sSfQ9KmaMoy5cBkdzxPN4cxjS4MX9cKT\nGAG78YZ/vxIQZ+75In2Yoc3bqJL7hdTtonvg4I3jAoGAb6Ky85t1lRfNbnVujW0e\nfBmxRvfK9Bzr5c2ZYfMdO7hD8mQUc4DOCPI+U2r2TtWUkgn3nmSRsf4fPMXDoXfQ\nXs1tJsPRDO3xTCnIxxYJqmt9rdPiXoG8x3kWaQMNOiKtulL8eXR2gAoQwmSZruJd\nHO6xHMkTrqlq17k1g3DwcX0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-storage@hackaz-265516.iam.gserviceaccount.com",
+  "client_id": "112093510774318584290",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-storage%40hackaz-265516.iam.gserviceaccount.com"
+}
