@@ -313,6 +313,19 @@ def new_question(p_id, question):
     insert_update_question(int(p_id), question)
     return jsonify(success=True)
 
+
+@app.route('/new_user/<p_id>/<name>/<phone>')
+def new_user(p_id, name, phone):
+    data = {}
+    #return str(question)
+    #insert_update_question(int(p_id), question)
+    data["name"] = name
+    data["phone"] = phone
+
+    insert_update_candidate(p_id, data)
+
+    return jsonify(success=True)
+
 @app.route('/edit_question/<p_id>/<question>/<question_id>')
 def edit_question(p_id, question, question_id):
     #return str(question)
