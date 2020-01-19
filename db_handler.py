@@ -77,9 +77,11 @@ def create_question(id_position, text):
 def update_question(id_position, id_question, new_text):
     questions = get_questions(id_position)
     for question in questions:
-        question.update((id, new_text) for id, _ in question.iteritems() if id == id_question)
+        if question['id_question'] == id_question:             
+            question["text"] = new_text
+
     with g.db.cursor() as cursor:
-        update_statement = "UPDATE positions SET questions=\"{}\" WHERE pid={}".format(json.dumps(questions), id_position)
+        update_statement = "UPDATE positions SET questions=\'{}\' WHERE pid={}".format(json.dumps(questions), id_position)
         cursor.execute(update_statement)
     g.db.commit()
 

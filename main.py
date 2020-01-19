@@ -137,6 +137,12 @@ def new_question(p_id, question):
     insert_update_question(int(p_id), question)
     return jsonify(success=True)
 
+@app.route('/edit_question/<p_id>/<question>/<question_id>')
+def edit_question(p_id, question, question_id):
+    #return str(question)
+    insert_update_question(int(p_id), question, question_id)
+    return jsonify(success=True)
+
 @app.route('/conf_create_question', methods=['POST'])
 def conf_create_question():
     id_position = 0
