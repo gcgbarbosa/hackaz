@@ -92,11 +92,7 @@ def get_next_question():
 
 @app.route("/testcall", methods=['GET', 'POST'])
 def test_call():
-    call_id = start_call(15038808741, 16)
-    #call_id = "CAe5a777f6971645aefb221f3ec3794f63"
-    #q_list = "[{'text': 'Whats your name?', 'id_question': 1, 'responseUrl': 'https://api.twilio.com/2010-04-01/Accounts/AC3e44fa4e321102d49970204274665cce/Recordings/REb68625bfd59e89afddb1cd8b504d5a58'}, {'text': 'How old are you?', 'id_question': 2, 'responseUrl': 'https://api.twilio.com/2010-04-01/Accounts/AC3e44fa4e321102d49970204274665cce/Recordings/RE1ffdfc810a3e0e252c27fe212e5ef70a'}]" 
-    #q_list = json.loads(q_list.replace("'", '\"'))
-    #transcribe_response(call_id, q_list) 
+    send_schedule_link('15038808741', 'testhash')
     return "OK\n"
 
 
