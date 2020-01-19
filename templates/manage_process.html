@@ -234,7 +234,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="confirm-modal-question" type="button" class="btn btn-primary">Save changes</button>
+              <button id="edit-confirm-modal-question" type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -251,12 +251,26 @@
         }); 
       });
 
+      $("#edit-confirm-modal-question").click(function() {
+        // get the question text
+        
+        question = $('#edit-txt-question').val()
+        question_id = $("#edit-question-id").val()
+
+        alert(question_id)
+        
+        $.get('/edit_question/{{ position[0] }}/'+question+'/'+question_id, function(data){
+          location.reload()
+        }); 
+      });
+
       $(".edit-question-btn").click(function(data, response) {
         console.log(data)
       });
 
       function edit_question(question_id, text){
         // set the id
+        alert(question_id)
         $("#edit-question-id").val(question_id)
         // set the text
         $("#edit-txt-question").val(text)

@@ -226,7 +226,7 @@ def after_request(response):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    mock()
+    #mock()
     if (request.method == 'POST'):
         email = request.form['email']
         password = request.form['password']
@@ -311,6 +311,12 @@ def confirm_schedule(token, linux_epoch):
 def new_question(p_id, question):
     #return str(question)
     insert_update_question(int(p_id), question)
+    return jsonify(success=True)
+
+@app.route('/edit_question/<p_id>/<question>/<question_id>')
+def edit_question(p_id, question, question_id):
+    #return str(question)
+    insert_update_question(int(p_id), question, question_id)
     return jsonify(success=True)
 
 @app.route('/conf_create_question', methods=['POST'])
