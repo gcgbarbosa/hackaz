@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, Blueprint, render_template, abort
 from twilio.twiml.voice_response import VoiceResponse, Say
 from twilio.rest import Client
 import pymysql
 import json
+
 
 
 account_sid = 'AC3e44fa4e321102d49970204274665cce'
@@ -71,21 +72,14 @@ def get_next_question():
     return str(response)
 
 
-@app.route("/callapplicant", methods=['GET', 'POST'])
-def start_call(): #TODO parse json from database 
+def start_call(Aphone, position_id): #TODO parse json from database 
     call = client.calls.create(
             url=server_url+'/getquestion',
             method='GET',
-            to='+15038808741',
+            to='+'+str(Aphone),
             from_='+12054481748'
            )
-    print(call)
     #Create response entry
     with db_connection.cursor() as cursor:
-        cursor.execute('INSERT INTO responses (rid) values ('+str(call.sid)+');')
-        
+        cursor.execute('INSERT INTO responses (rid) values ('+str(call.sid)+')')
     return call.sid
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
