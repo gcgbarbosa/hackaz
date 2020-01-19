@@ -91,17 +91,13 @@ def manage_process():
         hiring["candidates"].append(candidate)
     return render_template('manage_process.html', hiring=hiring)
 
-@app.route('/schedule_interview/<token>', methods=['GET'])
-def schedule_interview(token=None):
-    print("Params")
-    print(token)
-    if token!= None and not check_token(token):
-        print("No Token")
-        #TODO error
-        return
-    else:
-        return render_template('schedule_interview.html', token=token)
-        
+@app.route('/schedule_interview/<token>')
+def schedule_interview(token):
+    return render_template('schedule_interview.html', token=token)
+
+@app.route('/confirm_schedule/<token>/<linux_epoch>')
+def confirm_schedule(token, linux_epoch):
+    return token + ' ' + linux_epoch
 
 @app.route('/conf_scheduling', methods=['POST'])
 def conf_scheduling():
