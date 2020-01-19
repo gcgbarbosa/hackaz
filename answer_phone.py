@@ -3,7 +3,7 @@ from twilio.twiml.voice_response import VoiceResponse, Say
 from twilio.rest import Client
 import pymysql
 import json
-
+from __main__ import app
 
 
 account_sid = 'AC3e44fa4e321102d49970204274665cce'
